@@ -33,23 +33,20 @@ const user = handleActions(
     }
   },
   {
-    name: null,
+    name: 'teest',
     mode: 'sign-in',
     err: false
   }
 )
 
-const posts = handleActions({
-  [actions.fetchPostsSuccess](state, { payload: { posts } }) {
-    return posts;
+const items = handleActions({
+  [actions.fetchPostsSuccess](state, { payload: { items } }) {
+    return items;
   },
-  // [actions.addTask](state, {payload: {payload: {task}}}) {
-  //   return [task, ...tasks];
-  // }
 }, [])
 
 export default combineReducers({
   postsFetchingState,
   user,
-  posts
+  items
 });

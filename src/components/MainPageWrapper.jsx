@@ -140,7 +140,7 @@ export default (Component) => {
                         <AppBar position="static" color="default" elevation={0} className={classes.appBar}>
                             <Toolbar className={classes.toolbar}>
                                 <Typography variant="h6" color="inherit" noWrap className={classes.toolbarTitle}>
-                                    CARCASS
+                                    CONTACT
                                 </Typography>
                                 <nav className={classes.nav}>
 
@@ -178,11 +178,6 @@ export default (Component) => {
                     aria-describedby="alert-dialog-description"
                 >
                     <DialogTitle id="alert-dialog-title">{"Включить уведомления?"}</DialogTitle>
-                    <DialogContent>
-                        <DialogContentText id="alert-dialog-description">
-                            Уведомления будут приходить на ваш, телефон. Но пока эта функция в разработке
-                        </DialogContentText>
-                    </DialogContent>
                     <DialogActions>
                         <Button onClick={handleClosePopUp} color="primary">
                             Отмена
@@ -200,7 +195,7 @@ export default (Component) => {
                     open={snakCoockie}
                     autoHideDuration={6000}
                     onClose={handleCloseSnak}
-                    message="Добро пожаловать в CARCASE!"
+                    message="Добро пожаловать в CONTACT!"
                     action={
                         <React.Fragment>
                             <IconButton size="small" aria-label="close" color="inherit" onClick={handleCloseSnak}>

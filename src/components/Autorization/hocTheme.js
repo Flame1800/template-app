@@ -13,15 +13,6 @@ function changeTheme(WrappedComponent, theme) {
         };
       }
   
-    //   componentDidMount() {
-    //     // ...который подписывается на оповещения...
-    //     addChangeListener(this.handleChange);
-    //   }
-  
-    //   componentWillUnmount() {
-    //     removeChangeListener(this.handleChange);
-    //   }
-  
       handleChangeTheme() {
         this.setState({
           data: theme

@@ -83,7 +83,7 @@ export const fetchPosts = () => async (dispatch) => {
   dispatch(fetchPostsRequest());
 
   try {
-    const data = await axios.get('https://jsonplaceholder.typicode.com/posts');
+    const data = await axios.get('https://jsonplaceholder.typicode.com/users');
     dispatch(fetchPostsSuccess({ posts: data.data }));
   } catch (e) {
     dispatch(fetchPostsFailure());
