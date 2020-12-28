@@ -3,6 +3,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## Available Scripts
 
 In the project directory, you can run:
+
 Находясь в директории, что бы войти в режим разработки вы можете запустить в консоли:
 
 ### `npm run json`
