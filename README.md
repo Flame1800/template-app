@@ -3,8 +3,24 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## Available Scripts
 
 In the project directory, you can run:
+Находясь в директории, что бы войти в режим разработки вы можете запустить в консоли:
+
+### `npm run json`
+ 
+Что бы приложени работало с данными, в данном случае с моковыми данными.
+Эту команду нужно ОБЯЗАТЕЛЬНО запустить ВМЕСТЕ с одной из следующих команд: 
+
+npm start - для разработки.
+
+npm run build - для того что бы выпустить проект в продакшн
+После запуска этой команды по пути ./build/index.html можно открыть приложение в браузере
+
+Моковые данные хранятся в корне директории в файле db.json
+! Внимание ! Если не запустить npm run json приложение не будет стабильно работать
 
 ### `npm start`
+
+Запуск в режиме разработкчика
 
 Runs the app in the development mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
@@ -18,6 +34,8 @@ Launches the test runner in the interactive watch mode.<br />
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
 ### `npm run build`
+
+Запуск для продакшена
 
 Builds the app for production to the `build` folder.<br />
 It correctly bundles React in production mode and optimizes the build for the best performance.

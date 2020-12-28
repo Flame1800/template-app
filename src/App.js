@@ -14,10 +14,9 @@ class App extends React.Component {
 
   render () {
     const { user } = this.props;
-    
     return (
       <div className="App">
-        {user.name !== null ? <Posts /> : <Autorization />}
+        {user.name !== 'none'  ? <Posts /> : <Autorization />}
       </div>
     );
   }

@@ -5,29 +5,12 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { connect } from "react-redux";
 import * as actions from "../../actions/index.js";
-
-
-
-
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Carcass
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -52,25 +35,27 @@ const useStyles = makeStyles((theme) => ({
 
 const actionCreators = {
   changeMode: actions.changeMode,
-  loginUser: actions.loginUser,
+  setUserSuccess: actions.setUserSuccess,
+  loginUser: actions.loginUser
 };
 
 const mapStateToProps = (state) => {
-  const { user } = state;
-  return { stateUser: user };
+  const { user, userFetchingState } = state;
+  return { stateUser: user, userState: userFetchingState };
 }
-
-
 
 function SignIn(props) {
   const classes = useStyles();
 
   const [mail, setMail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState(false);
 
   const changeMode = () => props.changeMode('sign-up');
 
   const changeInputHandler = (e) => {
+    setError(false);
+
     const value = e.target.value;
     const name = e.target.name;
 
@@ -89,13 +74,8 @@ function SignIn(props) {
 
   const submitFormHandler = (e) => {
     e.preventDefault();
-    const user = { mail, password };
-    props.loginUser({ user });
+    props.loginUser({ currUser: {mail, password} });
   }
-
-  const { stateUser } = props;
-  
-  const loginErr = stateUser.err ? true : false;
 
   return (
     <Container component="main" maxWidth="xs">
@@ -144,7 +124,7 @@ function SignIn(props) {
           </Button>
           <Grid container>
             <Grid item xs={12}>
-              {loginErr && <div>Неправильный логин или пароль.</div>}
+              {props.userState === 'failed' && <div>Неправильный логин или пароль.</div>}
 
             </Grid>
             <Grid item>
@@ -155,9 +135,6 @@ function SignIn(props) {
           </Grid>
         </form>
       </div>
-      <Box mt={8}>
-        <Copyright />
-      </Box>
     </Container>
   );
 }

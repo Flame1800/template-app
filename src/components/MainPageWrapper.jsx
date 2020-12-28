@@ -12,11 +12,6 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import Brightness4Icon from '@material-ui/icons/Brightness4';
 import BrightnessHighIcon from '@material-ui/icons/BrightnessHigh';
 import * as actions from "../actions/index.js";
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
 import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
@@ -26,7 +21,7 @@ function Copyright() {
         <Typography variant="body2" color="textSecondary" align="center">
             {'Copyright © '}
             <Link color="inherit" href="*">
-                Carcass
+                Contact
             </Link>{' '}
             {new Date().getFullYear()}
             {'.'}
@@ -97,7 +92,6 @@ export default (Component) => {
 
     function OutputComponent(props) {
         const [darkMode, setDarkMode] = React.useState(false);
-        const [popUp, setPopUp] = React.useState(false);
         const [snakCoockie, setSnakCookie] = React.useState(true);
 
         const classes = useStyles();
@@ -114,14 +108,6 @@ export default (Component) => {
         const logoutUserHandler = () => props.logoutUser()
 
         const changeTheme = () => setDarkMode(!darkMode);
-
-        const handleClickOpenPopUp = () => {
-            setPopUp(true);
-        };
-
-        const handleClosePopUp = () => {
-            setPopUp(false);
-        };
 
         const handleCloseSnak = (event: React.SyntheticEvent | React.MouseEvent, reason?: string) => {
             if (reason === 'clickaway') {
@@ -151,9 +137,7 @@ export default (Component) => {
                                         {!darkMode ? <Brightness4Icon /> : <BrightnessHighIcon />}
                                     </Link>
                                 </nav>
-                                <Button variant="outlined" color="primary" onClick={handleClickOpenPopUp}>
-                                    Уведомления
-                                </Button>
+
                                 <Button href="#" color="default" variant="outlined" className={classes.link} onClick={logoutUserHandler}>
                                     Выйти
                                 </Button>
@@ -171,22 +155,6 @@ export default (Component) => {
                         {/* End footer */}
                     </div>
                 </React.Fragment>
-                <Dialog
-                    open={popUp}
-                    onClose={handleClosePopUp}
-                    aria-labelledby="alert-dialog-title"
-                    aria-describedby="alert-dialog-description"
-                >
-                    <DialogTitle id="alert-dialog-title">{"Включить уведомления?"}</DialogTitle>
-                    <DialogActions>
-                        <Button onClick={handleClosePopUp} color="primary">
-                            Отмена
-                        </Button>
-                        <Button onClick={handleClosePopUp} color="primary" autoFocus>
-                            Ок
-                        </Button>
-                    </DialogActions>
-                </Dialog>
                 <Snackbar
                     anchorOrigin={{
                         vertical: 'bottom',

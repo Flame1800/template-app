@@ -1,6 +1,6 @@
 {
   "name": "tempalte-app",
-  "homepage": "",
+  "homepage": ".",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -22,10 +22,11 @@
     "thunk": "0.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "react-scripts start", 
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "json": "json-server -w db.json --port 4000"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -51,3 +52,4 @@
     "eslint-plugin-react-hooks": "^4.2.0"
   }
 }
+ 

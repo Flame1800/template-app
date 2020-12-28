@@ -5,26 +5,13 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { connect } from "react-redux";
 import * as actions from "../../actions/index.js";
-
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -64,6 +51,7 @@ function SignUp(props) {
   const [password, setPassword] = useState('');
   const [passwordErr, setPasswordErr] = useState(false);
   const [mailErr, setMailErr] = useState(false);
+  const [loginErr, setLoginErr] = useState(false);
 
   const classes = useStyles();
   const changeMode = () => props.changeMode('sign-in');
@@ -90,10 +78,10 @@ function SignUp(props) {
     }
   }
 
-  const submitFormHandler = (e) => {
+  const submitFormHandler = async (e) => {
     e.preventDefault();
     const user = { name, surName, mail, password };
-    const re = /^[a-z]+@[a-z]+\.[a-z]{2,6}$/i;
+    const re = RegExp(/^([\w]+@([\w-]+\.)+[\w-]{2,4})?$/);
 
     if (password.length < 6) {
       setPasswordErr(true);
@@ -110,10 +98,18 @@ function SignUp(props) {
       setMailErr(false);
     }
 
-    props.addUser({ user });
-  }
+    const data = await axios.get('http://localhost:4000/users');
+    const users = data.data;
+    const filteredUsers = users.filter(currUser => currUser.mail === user.mail);
 
-  //const loginErr = props.stateUser.err ? true : false;
+    if (filteredUsers.length > 0) {
+      setLoginErr(true);
+      return;
+    } else {
+      setLoginErr(false);
+      props.addUser({ user });
+    }
+  }
 
   return (
     <Container component="main" maxWidth="xs">
@@ -181,12 +177,6 @@ function SignUp(props) {
                 onChange={changeInputHandler}
               />
             </Grid>
-            <Grid item xs={12}>
-              {passwordErr && <div>Пароль должен быть не менее 6 символов</div>}
-              {mailErr && <div>Введен некоректный Email</div>}
-              {/* {loginErr && <div>Этот email уже занят</div>} */}
-
-            </Grid>
           </Grid>
           <Button
             type="submit"
@@ -197,6 +187,12 @@ function SignUp(props) {
           >
             Зарегистрироваться
           </Button>
+          <Grid item xs={12}>
+            {passwordErr && <div>Пароль должен быть не менее 6 символов</div>}
+            {mailErr && <div>Введен некоректный Email</div>}
+            {loginErr && <div>Этот email уже занят</div>}
+
+          </Grid>
           <Grid container>
             <Grid item>
               <Link href="#" variant="body2" onClick={changeMode}>
@@ -206,9 +202,6 @@ function SignUp(props) {
           </Grid>
         </form>
       </div>
-      <Box mt={5}>
-        <Copyright />
-      </Box>
     </Container>
   );
 }

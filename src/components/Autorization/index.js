@@ -11,11 +11,14 @@ const mapStateToProps = (state) => {
 class Autoriztaion extends React.Component {
     render() {
         const { user } = this.props;
-        return (
-            <div>
-                {user.mode === 'sign-up' ? <SignUp /> : <SignIn />}
-            </div>
-        );
+        if (user.mode) {
+            return (
+                <div>
+                    {user.mode === 'sign-up' ? <SignUp /> : <SignIn />}
+                </div>
+            );
+        }
+        return null;
     }
 }
 
